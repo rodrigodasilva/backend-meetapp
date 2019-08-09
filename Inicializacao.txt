@@ -1,0 +1,10 @@
+1 -
+  > docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+2 -
+  > docker run --name redismeetapp -p 6379:6379 -d -t redis:alpine
+3 -
+  > yarn
+4 -
+  > yarn dev
+5 -
+  > yarn queue
