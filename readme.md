@@ -1,4 +1,4 @@
-#Desafio 3 realizado no Bootcamp da Rocketseat
+# Desafio 3 realizado no Bootcamp da Rocketseat
 Esta é a parte backend de um projeto chamado 'MeetApp' que faz parte do [desafio 03](https://github.com/Rocketseat/bootcamp-gostack-desafio-03) proposto no Bootcamp da Rocktseat.
 
 Em resumo, trata-se de uma API que fornece a lógica e as rotas para que o usuário possa logar e criar 'meetups' (reuniões) onde outros usuários possam se inscrever para participar.
