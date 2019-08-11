@@ -26,5 +26,6 @@ Em resumo, trata-se de uma API que fornece a lógica e as rotas para que o usuá
     > yarn dev
 5. Rodamos a aplição da fila
     > yarn queue
-
+6. Executamos as 'migrations' para criar as tabelas no banco de dados
+  > yarn sequelize db:migrate
 
