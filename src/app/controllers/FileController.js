@@ -11,6 +11,14 @@ class FileController {
 
     return res.json(file);
   }
+
+  async show(req, res) {
+    const { path } = req.params;
+
+    const file = await File.findOne({ where: { path } });
+
+    return res.status(200).json(file);
+  }
 }
 
 export default new FileController();

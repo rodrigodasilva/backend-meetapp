@@ -6,27 +6,27 @@ import User from '../models/User';
 
 class MeetupController {
   async index(req, res) {
-    // const { page = 1, date } = req.query;
+    const { page = 1, date } = req.query;
 
-    // if (!date) {
-    //   return res.status(400).json({ error: 'Invalid date' });
-    // }
+    if (!date) {
+      return res.status(400).json({ error: 'Invalid date' });
+    }
 
-    // const searchDate = parseISO(date);
+    const searchDate = parseISO(date);
 
     const meetups = await Meetup.findAll({
-      // where: {
-      //   date: {
-      //     [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
-      //   },
-      // },
-      // // order: ['date'],
-      // include: [User],
-      // /**
-      //  * Configurações de paginação
-      //  */
-      // limit: 10,
-      // offset: (page - 1) * 10,
+      where: {
+        date: {
+          [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
+        },
+      },
+      // order: ['date'],
+      include: [User],
+      /**
+       * Configurações de paginação
+       */
+      limit: 10,
+      offset: (page - 1) * 10,
     });
 
     return res.json(meetups);
@@ -38,7 +38,7 @@ class MeetupController {
       description: Yup.string().required(),
       location: Yup.string().required(),
       date: Yup.date().required(),
-      file_id: Yup.number().required(),
+      banner_id: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
