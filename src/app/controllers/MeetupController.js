@@ -3,6 +3,7 @@ import { parseISO, isBefore, startOfDay, endOfDay } from 'date-fns';
 import { Op } from 'sequelize';
 import Meetup from '../models/Meetup';
 import User from '../models/User';
+import File from '../models/File';
 
 class MeetupController {
   async index(req, res) {
@@ -30,6 +31,21 @@ class MeetupController {
     });
 
     return res.json(meetups);
+  }
+
+  async show(req, res) {
+    const meetup = await Meetup.findOne({
+      where: { id: req.params.id },
+      include: [
+        {
+          model: File,
+          as: 'banner',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(meetup);
   }
 
   async store(req, res) {
@@ -63,6 +79,7 @@ class MeetupController {
 
   async update(req, res) {
     const meetup = await Meetup.findByPk(req.params.id);
+
     if (!meetup) {
       return res.json({ error: "Meetup don't exists" });
     }
@@ -72,7 +89,7 @@ class MeetupController {
       description: Yup.string().required(),
       location: Yup.string().required(),
       date: Yup.date().required(),
-      file_id: Yup.number().required(),
+      banner_id: Yup.number().required(),
     });
 
     if (!(await schema.isValid(req.body))) {
@@ -90,7 +107,18 @@ class MeetupController {
 
     await meetup.update(req.body);
 
-    return res.json(meetup);
+    const returnMeetupWithAvatar = await Meetup.findOne({
+      where: { id: req.params.id },
+      include: [
+        {
+          model: File,
+          as: 'banner',
+          attributes: ['id', 'path', 'url'],
+        },
+      ],
+    });
+
+    return res.json(returnMeetupWithAvatar);
   }
 
   async delete(req, res) {
