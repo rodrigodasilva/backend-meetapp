@@ -21,8 +21,19 @@ class MeetupController {
           [Op.between]: [startOfDay(searchDate), endOfDay(searchDate)],
         },
       },
+      include: [
+        {
+          model: User,
+          attributes: ['id', 'name', 'email'],
+        },
+        {
+          model: File,
+          as: 'banner',
+          attributes: ['id', 'url', 'path'],
+        },
+      ],
       // order: ['date'],
-      include: [User],
+
       /**
        * Configurações de paginação
        */
