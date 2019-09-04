@@ -29,7 +29,7 @@ class MeetupController {
         {
           model: File,
           as: 'banner',
-          attributes: ['id', 'url', 'path'],
+          attributes: ['id', 'url', 'path', 'urlGenymotion'],
         },
       ],
       // order: ['date'],
