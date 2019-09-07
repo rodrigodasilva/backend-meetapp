@@ -86,7 +86,16 @@ class SubscriptionController {
       createdAt,
     });
 
-    return res.json({ subscription });
+    const returnSubscriptionWithMeetup = await Subscription.findOne({
+      where: { id: subscription.id },
+      include: [
+        {
+          model: Meetup,
+        },
+      ],
+    });
+
+    return res.json(returnSubscriptionWithMeetup);
   }
 }
 
