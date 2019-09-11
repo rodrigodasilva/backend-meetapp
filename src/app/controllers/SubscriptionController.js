@@ -23,9 +23,11 @@ class SubscriptionController {
             {
               model: File,
               as: 'banner',
+              attributes: ['id', 'path', 'url', 'urlGenymotion'],
             },
             {
               model: User,
+              attributes: ['id', 'name', 'email'],
             },
           ],
         },
@@ -101,6 +103,17 @@ class SubscriptionController {
       include: [
         {
           model: Meetup,
+          include: [
+            {
+              model: File,
+              as: 'banner',
+              attributes: ['id', 'path', 'url', 'urlGenymotion'],
+            },
+            {
+              model: User,
+              attributes: ['id', 'name', 'email'],
+            },
+          ],
         },
       ],
     });
