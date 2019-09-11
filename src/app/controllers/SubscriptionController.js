@@ -2,6 +2,7 @@ import { Op } from 'sequelize';
 import User from '../models/User';
 import Meetup from '../models/Meetup';
 import Subscription from '../models/Subscription';
+import File from '../models/File';
 
 import SubscriptionMail from '../jobs/SubscriptionMail';
 import Queue from '../../lib/Queue';
@@ -18,6 +19,15 @@ class SubscriptionController {
               [Op.gt]: new Date(),
             },
           },
+          include: [
+            {
+              model: File,
+              as: 'banner',
+            },
+            {
+              model: User,
+            },
+          ],
         },
       ],
       order: [[Meetup, 'date', 'ASC']],
@@ -96,6 +106,14 @@ class SubscriptionController {
     });
 
     return res.json(returnSubscriptionWithMeetup);
+  }
+
+  async delete(req, res) {
+    const subscription = await Subscription.findByPk(req.params.id);
+
+    await subscription.destroy();
+
+    return res.send();
   }
 }
 
