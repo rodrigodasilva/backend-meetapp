@@ -32,11 +32,9 @@ class MeetupController {
           attributes: ['id', 'url', 'path', 'urlGenymotion'],
         },
       ],
-      // order: ['date'],
 
-      /**
-       * Configurações de paginação
-       */
+      order: ['date'],
+
       limit: 10,
       offset: (page - 1) * 10,
     });
