@@ -14,7 +14,7 @@ class OrganizingCrontroller {
           attributes: ['id', 'path', 'url'],
         },
       ],
-      order: [['date', 'DESC']],
+      order: [['date', 'ASC']],
 
       limit: 5,
       offset: (page - 1) * 5,
