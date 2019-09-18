@@ -176,7 +176,7 @@ Se tudo ocorreu bem até aqui significa que a api está rodando, sendo assim pod
 }
 ```
 
-Todas as rotas a partir daqui requerem **autenticação na sessão**
+Todas as rotas a partir daqui requerem **autenticação na sessão** e a inserção do token gerado no campo 'auth' do cabeçalho da mensagem
 
 #### Files
 
